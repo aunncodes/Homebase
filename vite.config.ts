@@ -1,4 +1,4 @@
-import {defineConfig, build} from 'vite';
+import {defineConfig} from 'vite';
 import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import process from 'node:process';
@@ -8,45 +8,6 @@ import clean from 'vite-plugin-clean';
 import WextManifest from 'vite-plugin-wext-manifest';
 
 import type {Plugin} from 'vite';
-
-// Custom plugin to build scripts as IIFE (self-contained, no ES module imports)
-// Used for scripts that can't use ES modules (e.g., content scripts injected via manifest)
-function buildIIFEScripts(options: {
-  scripts: {name: string; entry: string}[];
-  outDir: string;
-  isDevelopment: boolean;
-}): Plugin {
-  return {
-    name: 'build-iife-scripts',
-    async writeBundle() {
-      for (const script of options.scripts) {
-        await build({
-          configFile: false,
-          build: {
-            write: true,
-            outDir: options.outDir,
-            emptyOutDir: false,
-            sourcemap: options.isDevelopment ? 'inline' : false,
-            minify: !options.isDevelopment,
-            rollupOptions: {
-              input: script.entry,
-              output: {
-                entryFileNames: `assets/js/${script.name}.bundle.js`,
-                format: 'iife',
-                inlineDynamicImports: true,
-              },
-            },
-            lib: {
-              entry: script.entry,
-              formats: ['iife'],
-              name: script.name,
-            },
-          },
-        });
-      }
-    },
-  };
-}
 
 export default defineConfig(({ mode }) => {
 	const isDevelopment = mode !== 'production';
@@ -110,19 +71,6 @@ export default defineConfig(({ mode }) => {
 				usePackageJSONVersion: true,
 			}),
 
-			// Build scripts as IIFE (no ES module imports)
-			// Content scripts can't use ES modules when injected via manifest
-			buildIIFEScripts({
-				scripts: [
-					{
-						name: 'contentScript',
-						entry: path.resolve(sourcePath, 'ContentScript/index.ts'),
-					},
-				],
-				outDir: getOutDir(),
-				isDevelopment,
-			}),
-
 			!isDevelopment &&
 				zipPack({
 					inDir: getOutDir(),
@@ -145,6 +93,7 @@ export default defineConfig(({ mode }) => {
 				input: {
 					// For UI pages, use the HTML file as the entry.
 					// Vite will find the <script> tag inside and bundle it.
+					newtab: path.resolve(sourcePath, 'index.html'),
 					popup: path.resolve(sourcePath, 'Popup/popup.html'),
 					options: path.resolve(sourcePath, 'Options/options.html'),
 					// Background script (service worker in Chrome, background script in Firefox)

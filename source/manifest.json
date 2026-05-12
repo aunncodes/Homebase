@@ -1,7 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Sample WebExtension",
+  "name": "Homebase",
   "version": "0.0.0",
+  "description": "Chrome extension for a clean new tab page to keep you focused.",
+  "short_name": "Homebase",
 
   "icons": {
     "16": "assets/icons/favicon-16.png",
@@ -9,25 +11,28 @@
     "48": "assets/icons/favicon-48.png",
     "128": "assets/icons/favicon-128.png"
   },
-  "description": "Sample description",
-  "homepage_url": "https://github.com/abhijithvijayan/web-extension-starter",
-  "short_name": "Sample Name",
 
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["storage"],
 
-  "optional_permissions": [],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
 
-  "__chrome__host_permissions": [],
+  "__chrome__host_permissions": [
+    "https://api.open-meteo.com/*",
+    "https://geocoding-api.open-meteo.com/*",
+    "https://www.google.com/s2/favicons*"
+  ],
 
-  "__chrome__optional_host_permissions": ["http://*/*", "https://*/*"],
-
-  "__firefox__optional_host_permissions": ["http://*/*", "https://*/*"],
+  "__firefox__host_permissions": [
+    "https://api.open-meteo.com/*",
+    "https://geocoding-api.open-meteo.com/*",
+    "https://www.google.com/s2/favicons*"
+  ],
 
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self';"
   },
-
-  "__chrome|firefox__author": "abhijithvijayan",
 
   "__firefox__browser_specific_settings": {
     "gecko": {
@@ -40,45 +45,5 @@
     }
   },
 
-  "__chrome__minimum_chrome_version": "88",
-
-  "action": {
-    "default_popup": "Popup/popup.html",
-    "default_icon": {
-      "16": "assets/icons/favicon-16.png",
-      "32": "assets/icons/favicon-32.png",
-      "48": "assets/icons/favicon-48.png",
-      "128": "assets/icons/favicon-128.png"
-    },
-    "default_title": "tiny title"
-  },
-
-  "__chrome__options_page": "Options/options.html",
-  "options_ui": {
-    "page": "Options/options.html",
-    "open_in_tab": true
-  },
-
-  "background": {
-    "__chrome__service_worker": "assets/js/background.bundle.js",
-    "__chrome__type": "module",
-    "__firefox__scripts": ["assets/js/background.bundle.js"],
-    "__firefox__type": "module"
-  },
-
-  "content_scripts": [
-    {
-      "run_at": "document_start",
-      "matches": ["http://*/*", "https://*/*"],
-      "css": [],
-      "js": ["assets/js/contentScript.bundle.js"]
-    }
-  ],
-
-  "web_accessible_resources": [
-    {
-      "resources": ["assets/*"],
-      "matches": ["http://*/*", "https://*/*"]
-    }
-  ]
+  "__chrome__minimum_chrome_version": "88"
 }
