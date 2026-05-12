@@ -6,7 +6,6 @@ import {
   CloudRain,
   CloudSnow,
   CloudSun,
-  MapPin,
   Search,
   Sun,
   X,
@@ -24,13 +23,6 @@ import styles from '../App.module.scss';
 interface WeatherWidgetProps {
   location: WeatherLocation | null;
   onLocationChange: (location: WeatherLocation | null) => void;
-}
-
-function getLocationPinStyle(location: WeatherLocation): React.CSSProperties {
-  return {
-    left: `${((location.longitude + 180) / 360) * 100}%`,
-    top: `${((90 - location.latitude) / 180) * 100}%`,
-  };
 }
 
 function getWeatherIcon(condition?: string): ReactElement {
@@ -149,9 +141,6 @@ export const WeatherWidget: FC<WeatherWidgetProps> = ({
     setIsPickerOpen(false);
   };
 
-  const displayLocations =
-    results.length > 0 ? results : location ? [location] : [];
-
   return (
     <>
       <button
@@ -215,22 +204,6 @@ export const WeatherWidget: FC<WeatherWidgetProps> = ({
             </div>
 
             <div className={styles.weatherPickerBody}>
-              <div className={styles.mapPanel} aria-label="Location map">
-                <div className={styles.mapGrid} aria-hidden="true" />
-                {displayLocations.map((displayLocation) => (
-                  <button
-                    key={`${displayLocation.id}-${displayLocation.latitude}`}
-                    type="button"
-                    className={styles.mapPin}
-                    style={getLocationPinStyle(displayLocation)}
-                    onClick={(): void => selectLocation(displayLocation)}
-                    aria-label={`Select ${formatLocation(displayLocation)}`}
-                    title={formatLocation(displayLocation)}
-                  >
-                    <MapPin size={18} aria-hidden="true" />
-                  </button>
-                ))}
-              </div>
 
               <div className={styles.cityPicker}>
                 <form className={styles.citySearch} onSubmit={handleSearch}>
