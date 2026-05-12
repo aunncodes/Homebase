@@ -238,6 +238,12 @@ button {
   color: #ffffff;
   border-color: #244f65;
   background: #244f65;
+
+  &:hover {
+    color: #ffffff;
+    border-color: #183d50;
+    background: #183d50;
+  }
 }
 
 .iconButtonDanger {
@@ -272,11 +278,14 @@ button {
   gap: 14px;
   color: inherit;
   text-decoration: none;
-  padding-right: 76px;
 
   &:hover strong {
     color: #244f65;
   }
+}
+
+.linkCard:has(.cardActions) .linkTarget {
+  padding-right: 76px;
 }
 
 .linkIcon {
