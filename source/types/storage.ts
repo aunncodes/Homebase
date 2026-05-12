@@ -14,6 +14,20 @@ export interface WeatherLocation {
   country?: string;
   timezone?: string;
 }
+export interface WeatherReport {
+  condition: string;
+  high: number;
+  low: number;
+  temperature: number;
+}
+
+export interface CachedDailyWeather {
+  locationId: number;
+  forecastDate: string;
+  high: number;
+  low: number;
+  fetchedAt: number;
+}
 
 export interface HomebaseSettings {
   hotLinks: HotLink[];
@@ -23,6 +37,7 @@ export interface HomebaseSettings {
 
 export interface StorageSchema {
   homebase: HomebaseSettings;
+  dailyWeatherCache: CachedDailyWeather | null;
 }
 
 export const defaultHotLinks: HotLink[] = [
@@ -56,4 +71,5 @@ export const defaultHomebaseSettings: HomebaseSettings = {
 
 export const defaultStorage: StorageSchema = {
   homebase: defaultHomebaseSettings,
+  dailyWeatherCache: null,
 };

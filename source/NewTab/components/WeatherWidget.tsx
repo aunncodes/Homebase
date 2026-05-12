@@ -11,13 +11,12 @@ import {
   X,
   Zap,
 } from 'lucide-react';
-import type {WeatherLocation} from '../../types/storage';
+import type {WeatherLocation, WeatherReport} from '../../types/storage';
 import {
   fetchWeatherReport,
   formatLocation,
   searchWeatherLocations,
 } from '../utils/weather';
-import type {WeatherReport} from '../utils/weather';
 import styles from '../App.module.scss';
 
 interface WeatherWidgetProps {
