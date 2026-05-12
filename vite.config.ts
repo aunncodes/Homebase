@@ -91,15 +91,7 @@ export default defineConfig(({ mode }) => {
 
 			rollupOptions: {
 				input: {
-					// For UI pages, use the HTML file as the entry.
-					// Vite will find the <script> tag inside and bundle it.
 					newtab: path.resolve(sourcePath, 'index.html'),
-					popup: path.resolve(sourcePath, 'Popup/popup.html'),
-					options: path.resolve(sourcePath, 'Options/options.html'),
-					// Background script (service worker in Chrome, background script in Firefox)
-					// Both MV3 implementations support ES modules
-					background: path.resolve(sourcePath, 'Background/index.ts'),
-					// Note: contentScript is built separately as IIFE via buildIIFEScripts plugin
 				},
 
 				output: {

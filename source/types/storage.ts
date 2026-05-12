@@ -5,12 +5,6 @@ export interface HotLink {
   iconUrl?: string;
 }
 
-export interface HomebaseSettings {
-  hotLinks: HotLink[];
-  stickyNote: string;
-  weatherLocation: WeatherLocation | null;
-}
-
 export interface WeatherLocation {
   id: number;
   name: string;
@@ -21,10 +15,13 @@ export interface WeatherLocation {
   timezone?: string;
 }
 
+export interface HomebaseSettings {
+  hotLinks: HotLink[];
+  stickyNote: string;
+  weatherLocation: WeatherLocation | null;
+}
+
 export interface StorageSchema {
-  username: string;
-  enableLogging: boolean;
-  visitCount: number;
   homebase: HomebaseSettings;
 }
 
@@ -58,8 +55,5 @@ export const defaultHomebaseSettings: HomebaseSettings = {
 };
 
 export const defaultStorage: StorageSchema = {
-  username: '',
-  enableLogging: false,
-  visitCount: 0,
   homebase: defaultHomebaseSettings,
 };

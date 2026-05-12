@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import type {FC} from 'react';
 import {getStorage, setStorage} from '../utils/storage';
-import {defaultHomebaseSettings, defaultHotLinks} from '../types/storage';
-import type {HomebaseSettings, HotLink} from '../types/storage';
+import {defaultHomebaseSettings, defaultHotLinks, HomebaseSettings} from '../types/storage';
+import type {HotLink} from '../types/storage';
 import {Header} from './components/Header';
 import {HotLinks} from './components/HotLinks';
 import {StickyPad} from './components/StickyPad';
@@ -48,10 +48,7 @@ function normalizeSettings(settings: HomebaseSettings): HomebaseSettings {
     hotLinks: Array.isArray(settings.hotLinks)
       ? settings.hotLinks
       : defaultHotLinks,
-    stickyNote:
-      typeof settings.stickyNote === 'string'
-        ? settings.stickyNote
-        : defaultHomebaseSettings.stickyNote,
+    stickyNote: settings.stickyNote,
     weatherLocation,
   };
 }
