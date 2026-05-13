@@ -21,6 +21,8 @@ export interface WeatherReport {
   temperature: number;
 }
 
+export type HomebaseThemeId = 'light' | 'green' | 'purple' | 'dark' | 'warm';
+
 export interface CachedDailyWeather {
   locationId: number;
   forecastDate: string;
@@ -32,6 +34,7 @@ export interface CachedDailyWeather {
 export interface HomebaseSettings {
   hotLinks: HotLink[];
   stickyNote: string;
+  themeId: HomebaseThemeId;
   weatherLocation: WeatherLocation | null;
 }
 
@@ -66,6 +69,7 @@ export const defaultHotLinks: HotLink[] = [
 export const defaultHomebaseSettings: HomebaseSettings = {
   hotLinks: defaultHotLinks,
   stickyNote: '',
+  themeId: 'light',
   weatherLocation: null,
 };
 

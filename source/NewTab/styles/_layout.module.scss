@@ -1,0 +1,117 @@
+@use "../../styles/variables";
+
+:global(html),
+:global(body),
+:global(#homebase-root) {
+  min-height: 100%;
+}
+
+:global(body) {
+  margin: 0;
+  color: #172033;
+  font-family: variables.$fontFamily;
+  background: #dce9e3;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 56px));
+  margin: 0 auto;
+  padding: 36px 0 44px;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.header {
+  min-width: 0;
+
+  h1 {
+    margin: 6px 0 8px;
+    color: var(--heading);
+    font-size: 52px;
+    font-weight: variables.$bold;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+}
+
+.kicker {
+  margin: 0;
+  color: var(--kicker);
+  font-size: 13px;
+  font-weight: variables.$semibold;
+  letter-spacing: 0;
+}
+
+.date {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: variables.$medium;
+  letter-spacing: 0;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+.hotLinks,
+.stickyPad,
+.weatherWidget,
+.linkEditor,
+.emptyState {
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  transition:
+    background 0.42s ease,
+    border-color 0.42s ease,
+    box-shadow 0.42s ease,
+    color 0.32s ease;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+
+  h2 {
+    margin: 4px 0 0;
+    color: var(--heading);
+    font-size: 24px;
+    font-weight: variables.$bold;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

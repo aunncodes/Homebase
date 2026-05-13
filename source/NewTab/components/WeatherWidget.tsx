@@ -203,7 +203,6 @@ export const WeatherWidget: FC<WeatherWidgetProps> = ({
             </div>
 
             <div className={styles.weatherPickerBody}>
-
               <div className={styles.cityPicker}>
                 <form className={styles.citySearch} onSubmit={handleSearch}>
                   <label>

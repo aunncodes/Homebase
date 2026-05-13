@@ -1,0 +1,120 @@
+@use "../../styles/variables";
+
+.hotLinks {
+  min-width: 0;
+  padding: 22px;
+}
+
+.linkGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
+  gap: 14px;
+}
+
+.linkCard {
+  position: relative;
+  display: flex;
+  min-height: 148px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--panel-strong-bg);
+  box-shadow: var(--card-shadow);
+  transition:
+    background 0.42s ease,
+    border-color 0.42s ease,
+    box-shadow 0.42s ease;
+}
+
+.linkTarget {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover strong {
+    color: var(--accent);
+  }
+}
+
+.linkCard:has(.cardActions) .linkTarget {
+  padding-right: 76px;
+}
+
+.linkIcon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  color: var(--accent-strong);
+  background: var(--link-icon-bg);
+  font-size: 18px;
+  font-weight: variables.$bold;
+
+  img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+}
+
+.linkText {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+
+  strong,
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  strong {
+    color: var(--heading);
+    font-size: 17px;
+    font-weight: variables.$bold;
+    letter-spacing: 0;
+  }
+
+  span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+}
+
+.cardActions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 32px);
+  gap: 8px;
+
+  .iconButton {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.emptyState {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  margin-top: 14px;
+  padding: 18px;
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+}

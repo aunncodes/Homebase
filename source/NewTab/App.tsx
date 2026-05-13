@@ -1,14 +1,20 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import type {FC} from 'react';
 import {getStorage, setStorage} from '../utils/storage';
-import {defaultHomebaseSettings, defaultHotLinks, HomebaseSettings} from '../types/storage';
-import type {HotLink} from '../types/storage';
+import {defaultHomebaseSettings, defaultHotLinks} from '../types/storage';
+import type {
+  HomebaseSettings,
+  HomebaseThemeId,
+  HotLink,
+  WeatherLocation,
+} from '../types/storage';
 import {Header} from './components/Header';
 import {HotLinks} from './components/HotLinks';
 import {StickyPad} from './components/StickyPad';
+import {ThemePicker} from './components/ThemePicker';
 import {WeatherWidget} from './components/WeatherWidget';
 import type {LinkDraft} from './components/LinkEditor';
-import type {WeatherLocation} from '../types/storage';
+import {normalizeThemeId} from './themes';
 import styles from './App.module.scss';
 
 const saveDelay = 450;
@@ -43,12 +49,17 @@ function normalizeSettings(settings: HomebaseSettings): HomebaseSettings {
     settings.weatherLocation && typeof settings.weatherLocation === 'object'
       ? settings.weatherLocation
       : defaultHomebaseSettings.weatherLocation;
+  const themeId = normalizeThemeId(settings.themeId);
 
   return {
     hotLinks: Array.isArray(settings.hotLinks)
       ? settings.hotLinks
       : defaultHotLinks,
-    stickyNote: settings.stickyNote,
+    stickyNote:
+      typeof settings.stickyNote === 'string'
+        ? settings.stickyNote
+        : defaultHomebaseSettings.stickyNote,
+    themeId,
     weatherLocation,
   };
 }
@@ -58,6 +69,8 @@ const App: FC = () => {
     defaultHomebaseSettings
   );
   const [hasLoadedStorage, setHasLoadedStorage] = useState(false);
+  const [isThemeChanging, setIsThemeChanging] = useState(false);
+  const themeAnimationTimer = useRef<number | null>(null);
 
   useEffect(() => {
     getStorage(['homebase'])
@@ -84,6 +97,15 @@ const App: FC = () => {
       window.clearTimeout(saveTimer);
     };
   }, [hasLoadedStorage, homebase]);
+
+  useEffect(
+    () => (): void => {
+      if (themeAnimationTimer.current) {
+        window.clearTimeout(themeAnimationTimer.current);
+      }
+    },
+    []
+  );
 
   const createLink = (draft: LinkDraft): string | null => {
     const title = draft.title.trim();
@@ -176,9 +198,39 @@ const App: FC = () => {
     });
   };
 
+  const updateTheme = (themeId: HomebaseThemeId): void => {
+    if (themeId === homebase.themeId) {
+      return;
+    }
+
+    if (themeAnimationTimer.current) {
+      window.clearTimeout(themeAnimationTimer.current);
+    }
+
+    setIsThemeChanging(true);
+    themeAnimationTimer.current = window.setTimeout(() => {
+      setIsThemeChanging(false);
+    }, 620);
+
+    setHomebase((currentHomebase): HomebaseSettings => {
+      return {
+        ...currentHomebase,
+        themeId,
+      };
+    });
+  };
+
+  const pageClassName = `${styles.page} ${
+    isThemeChanging ? styles.themeChanging : ''
+  }`;
+
   return (
-    <div className={styles.page}>
+    <div className={pageClassName} data-theme={homebase.themeId}>
       <div className={styles.shell}>
+        <ThemePicker
+          selectedThemeId={homebase.themeId}
+          onThemeChange={updateTheme}
+        />
         <div className={styles.topbar}>
           <Header />
           <WeatherWidget

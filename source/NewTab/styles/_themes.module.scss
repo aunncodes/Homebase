@@ -1,0 +1,231 @@
+.page {
+  --body-bg: #dce9e3;
+  --page-gradient: linear-gradient(
+    118deg,
+    #f7eddc 0%,
+    #ddebdc 34%,
+    #d1e4ea 70%,
+    #e4dde7 100%
+  );
+  --pattern-line: rgba(36, 79, 101, 0.045);
+  --paper-line: rgba(255, 255, 255, 0.22);
+  --text: #172033;
+  --heading: #132331;
+  --muted: #60717d;
+  --kicker: #4e6b5d;
+  --panel-bg: rgba(255, 255, 255, 0.58);
+  --panel-strong-bg: rgba(255, 255, 255, 0.72);
+  --panel-hover-bg: rgba(255, 255, 255, 0.78);
+  --panel-border: rgba(255, 255, 255, 0.72);
+  --soft-border: rgba(36, 79, 101, 0.2);
+  --shadow: 0 18px 48px rgba(35, 55, 69, 0.12);
+  --card-shadow: 0 10px 24px rgba(35, 55, 69, 0.08);
+  --accent: #244f65;
+  --accent-strong: #183d50;
+  --accent-contrast: #ffffff;
+  --accent-soft: #e4efe7;
+  --focus-ring: rgba(36, 79, 101, 0.14);
+  --danger: #8f2f2f;
+  --link-icon-bg: linear-gradient(135deg, #e8d7b8, #b6d5c6);
+  --note-bg: linear-gradient(
+      180deg,
+      rgba(255, 253, 202, 0.98) 0%,
+      rgba(255, 247, 152, 0.9) 100%
+    ),
+    #fff5a7;
+  --note-lines: rgba(90, 77, 36, 0.08);
+  --note-text: #2c2617;
+  --note-shadow: 0 28px 42px rgba(98, 83, 33, 0.18);
+  --tape-bg: rgba(235, 221, 170, 0.72);
+  --modal-bg: rgba(248, 250, 247, 0.94);
+  --theme-flash: rgba(255, 255, 255, 0.58);
+  --card-border: rgba(21, 42, 56, 0.08);
+  --button-shadow: 0 8px 20px rgba(35, 55, 69, 0.08);
+  --modal-shadow: 0 22px 60px rgba(23, 32, 51, 0.2);
+  --input-bg: var(--panel-strong-bg);
+
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: var(--text);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28) 0 72px,
+      rgba(255, 255, 255, 0.08) 72px 128px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--pattern-line) 0 1px,
+      transparent 1px 32px
+    ),
+    var(--page-gradient);
+  background-color: var(--body-bg);
+  background-size:
+    auto,
+    96px 96px,
+    auto;
+  transition:
+    background 0.5s ease,
+    color 0.35s ease;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    background:
+      linear-gradient(
+        90deg,
+        transparent 0 42%,
+        var(--paper-line) 42% 43%,
+        transparent 43%
+      ),
+      linear-gradient(
+        0deg,
+        transparent 0 58%,
+        rgba(255, 255, 255, 0.18) 58% 59%,
+        transparent 59%
+      );
+    background-size:
+      260px 260px,
+      300px 300px;
+    opacity: 0.68;
+    transition:
+      background 0.5s ease,
+      opacity 0.5s ease;
+  }
+}
+
+.page[data-theme="green"] {
+  --body-bg: #d8e8d5;
+  --page-gradient: linear-gradient(
+    118deg,
+    #edf2df 0%,
+    #cddfc8 34%,
+    #a8cdb5 68%,
+    #d5e9e1 100%
+  );
+  --pattern-line: rgba(49, 95, 84, 0.06);
+  --paper-line: rgba(255, 255, 255, 0.24);
+  --text: #20322c;
+  --heading: #152720;
+  --muted: #5a7068;
+  --kicker: #416a55;
+  --panel-bg: rgba(248, 252, 244, 0.62);
+  --panel-strong-bg: rgba(255, 255, 250, 0.76);
+  --panel-hover-bg: rgba(255, 255, 250, 0.86);
+  --soft-border: rgba(49, 95, 84, 0.22);
+  --accent: #315f54;
+  --accent-strong: #24483f;
+  --accent-soft: #dcebd7;
+  --focus-ring: rgba(49, 95, 84, 0.15);
+  --link-icon-bg: linear-gradient(135deg, #e8e0b8, #a6c6a8);
+  --theme-flash: rgba(213, 233, 225, 0.64);
+}
+
+.page[data-theme="purple"] {
+  --body-bg: #d8d3e4;
+  --page-gradient: linear-gradient(
+    118deg,
+    #f2dfd7 0%,
+    #d7c5e6 32%,
+    #b6c6e9 70%,
+    #eadad6 100%
+  );
+  --pattern-line: rgba(81, 64, 111, 0.06);
+  --paper-line: rgba(255, 255, 255, 0.22);
+  --text: #211f34;
+  --heading: #191629;
+  --muted: #665f78;
+  --kicker: #765b72;
+  --panel-bg: rgba(255, 248, 249, 0.6);
+  --panel-strong-bg: rgba(255, 255, 255, 0.72);
+  --panel-hover-bg: rgba(255, 255, 255, 0.84);
+  --soft-border: rgba(81, 64, 111, 0.22);
+  --accent: #51406f;
+  --accent-strong: #3d3055;
+  --accent-soft: #eadff2;
+  --focus-ring: rgba(81, 64, 111, 0.16);
+  --link-icon-bg: linear-gradient(135deg, #f0c7b8, #c8b4e5);
+  --theme-flash: rgba(237, 218, 225, 0.64);
+}
+
+.page[data-theme="dark"] {
+  --body-bg: #19283a;
+  --page-gradient: linear-gradient(
+    118deg,
+    #132437 0%,
+    #263d50 42%,
+    #244b49 74%,
+    #1b2a3d 100%
+  );
+  --pattern-line: rgba(235, 255, 246, 0.08);
+  --paper-line: rgba(235, 255, 246, 0.08);
+  --text: #e8f5ee;
+  --heading: #f8fff9;
+  --muted: #a8c2c4;
+  --kicker: #b9e2cf;
+  --panel-bg: rgba(19, 33, 48, 0.7);
+  --panel-strong-bg: rgba(28, 46, 62, 0.76);
+  --panel-hover-bg: rgba(34, 57, 73, 0.86);
+  --panel-border: rgba(216, 244, 232, 0.22);
+  --soft-border: rgba(205, 238, 229, 0.26);
+  --shadow: 0 22px 54px rgba(2, 12, 18, 0.28);
+  --card-shadow: 0 12px 28px rgba(2, 12, 18, 0.22);
+  --accent: #f5d778;
+  --accent-strong: #f1c94d;
+  --accent-contrast: #182333;
+  --accent-soft: rgba(245, 215, 120, 0.16);
+  --focus-ring: rgba(245, 215, 120, 0.2);
+  --danger: #f0a8a1;
+  --link-icon-bg: linear-gradient(135deg, #f5d778, #89d4bf);
+  --note-bg: linear-gradient(180deg, #fff3a8 0%, #f1dc72 100%);
+  --theme-flash: rgba(245, 215, 120, 0.35);
+  --card-border: rgba(216, 244, 232, 0.16);
+  --button-shadow: 0 8px 20px rgba(2, 12, 18, 0.24);
+  --modal-bg: rgba(16, 30, 44, 0.96);
+  --modal-shadow: 0 22px 60px rgba(2, 12, 18, 0.42);
+  --input-bg: rgba(12, 25, 39, 0.88);
+}
+
+.page[data-theme="warm"] {
+  --body-bg: #f4dfb5;
+  --page-gradient: linear-gradient(
+    118deg,
+    #fff0b8 0%,
+    #f3b26f 28%,
+    #b5d7c1 68%,
+    #bfd6de 100%
+  );
+  --pattern-line: rgba(63, 97, 99, 0.06);
+  --paper-line: rgba(255, 255, 255, 0.26);
+  --text: #24313a;
+  --heading: #18262b;
+  --muted: #657061;
+  --kicker: #5d6f41;
+  --panel-bg: rgba(255, 252, 232, 0.64);
+  --panel-strong-bg: rgba(255, 255, 246, 0.78);
+  --panel-hover-bg: rgba(255, 255, 246, 0.88);
+  --soft-border: rgba(63, 97, 99, 0.22);
+  --accent: #3f6163;
+  --accent-strong: #29494c;
+  --accent-soft: #e7ebc2;
+  --focus-ring: rgba(63, 97, 99, 0.15);
+  --link-icon-bg: linear-gradient(135deg, #ffd989, #a6ccb6);
+  --theme-flash: rgba(255, 217, 137, 0.46);
+}
+
+.themeChanging::after {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(
+    circle at calc(100% - 42px) calc(100% - 42px),
+    var(--theme-flash) 0%,
+    transparent 58%
+  );
+  animation: theme-wash 620ms ease forwards;
+}

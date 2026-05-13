@@ -170,22 +170,6 @@ export async function searchWeatherLocations(
   });
 }
 
-export async function fetchWeatherReport(
-  location: WeatherLocation
-): Promise<WeatherReport> {
-  const [currentWeather, dailyWeather] = await Promise.all([
-    fetchCurrentWeather(location),
-    getDailyWeather(location),
-  ]);
-
-  return {
-    condition: currentWeather.condition,
-    temperature: currentWeather.temperature,
-    high: dailyWeather.high,
-    low: dailyWeather.low,
-  };
-}
-
 async function fetchCurrentWeather(
   location: WeatherLocation
 ): Promise<CurrentWeather> {
@@ -215,28 +199,20 @@ async function fetchCurrentWeather(
   };
 }
 
-async function getDailyWeather(
-  location: WeatherLocation
-): Promise<DailyWeather> {
-  const cachedDailyWeather = await getCachedDailyWeather(location);
-
-  if (cachedDailyWeather) {
-    return cachedDailyWeather;
+function isValidDailyWeatherCache(value: unknown): value is CachedDailyWeather {
+  if (!value || typeof value !== 'object') {
+    return false;
   }
 
-  const dailyWeather = await fetchFreshDailyWeather(location);
+  const cache = value as Partial<CachedDailyWeather>;
 
-  await setStorage({
-    dailyWeatherCache: {
-      locationId: location.id,
-      forecastDate: getLocalDateKey(location.timezone),
-      high: dailyWeather.high,
-      low: dailyWeather.low,
-      fetchedAt: Date.now(),
-    },
-  });
-
-  return dailyWeather;
+  return (
+    typeof cache.locationId === 'number' &&
+    typeof cache.forecastDate === 'string' &&
+    typeof cache.high === 'number' &&
+    typeof cache.low === 'number' &&
+    typeof cache.fetchedAt === 'number'
+  );
 }
 
 async function getCachedDailyWeather(
@@ -295,20 +271,42 @@ async function fetchFreshDailyWeather(
   };
 }
 
-function isValidDailyWeatherCache(
-  value: unknown
-): value is CachedDailyWeather {
-  if (!value || typeof value !== 'object') {
-    return false;
+async function getDailyWeather(
+  location: WeatherLocation
+): Promise<DailyWeather> {
+  const cachedDailyWeather = await getCachedDailyWeather(location);
+
+  if (cachedDailyWeather) {
+    return cachedDailyWeather;
   }
 
-  const cache = value as Partial<CachedDailyWeather>;
+  const dailyWeather = await fetchFreshDailyWeather(location);
 
-  return (
-    typeof cache.locationId === 'number' &&
-    typeof cache.forecastDate === 'string' &&
-    typeof cache.high === 'number' &&
-    typeof cache.low === 'number' &&
-    typeof cache.fetchedAt === 'number'
-  );
+  await setStorage({
+    dailyWeatherCache: {
+      locationId: location.id,
+      forecastDate: getLocalDateKey(location.timezone),
+      high: dailyWeather.high,
+      low: dailyWeather.low,
+      fetchedAt: Date.now(),
+    },
+  });
+
+  return dailyWeather;
+}
+
+export async function fetchWeatherReport(
+  location: WeatherLocation
+): Promise<WeatherReport> {
+  const [currentWeather, dailyWeather] = await Promise.all([
+    fetchCurrentWeather(location),
+    getDailyWeather(location),
+  ]);
+
+  return {
+    condition: currentWeather.condition,
+    temperature: currentWeather.temperature,
+    high: dailyWeather.high,
+    low: dailyWeather.low,
+  };
 }

@@ -1,0 +1,61 @@
+@use "../../styles/variables";
+
+.linkEditor {
+  margin-bottom: 18px;
+  padding: 16px;
+
+  h3 {
+    margin: 0 0 12px;
+    color: var(--heading);
+    font-size: 16px;
+    font-weight: variables.$bold;
+    letter-spacing: 0;
+  }
+}
+
+.editorGrid {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(190px, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+
+  label {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: variables.$semibold;
+  }
+
+  input {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid var(--soft-border);
+    border-radius: 8px;
+    padding: 0 12px;
+    color: var(--text);
+    background: var(--input-bg);
+    outline: none;
+
+    &:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
+  }
+}
+
+.editorActions {
+  display: flex;
+  gap: 8px;
+}
+
+.formError {
+  margin: 10px 0 0;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: variables.$medium;
+}
