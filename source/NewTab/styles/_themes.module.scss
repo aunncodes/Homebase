@@ -237,10 +237,21 @@
   inset: 0;
   pointer-events: none;
   content: "";
-  background: radial-gradient(
-    circle at calc(100% - 42px) calc(100% - 42px),
-    var(--theme-flash) 0%,
-    transparent 58%
-  );
-  animation: theme-wash 620ms ease forwards;
+  background: var(--theme-flash);
+  transform: translateX(-100%);
+  animation: theme-slide 620ms ease forwards;
+}
+
+@keyframes theme-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  45% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
