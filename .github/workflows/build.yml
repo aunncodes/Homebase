@@ -1,4 +1,5 @@
 name: Build and Deploy
+
 run-name: ${{ github.actor }} started build action
 
 on:
@@ -8,15 +9,18 @@ on:
   pull_request:
     branches:
       - main
-
   workflow_dispatch:
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.ref }}'
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: Build extensions
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -35,19 +39,31 @@ jobs:
       - name: Build for all browsers
         run: npm run build
 
-      - name: Upload Chrome extension artifact
+      - name: Verify release files exist
+        run: |
+          test -f extension/chrome.zip
+          test -f extension/firefox.xpi
+
+      - name: Upload release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: chrome-extension
-          path: extension/chrome.zip
+          name: release-files
+          path: |
+            extension/chrome.zip
+            extension/firefox.xpi
+          if-no-files-found: error
+          retention-days: 7
 
-      - name: Upload Firefox extension artifact
+      - name: Upload extension directory
         uses: actions/upload-artifact@v4
         with:
-          name: firefox-extension
-          path: extension/firefox.xpi
+          name: extension-dir
+          path: extension
+          if-no-files-found: error
+          retention-days: 7
 
-  deploy:
+  release:
+    name: Update latest GitHub release
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -56,32 +72,46 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          name: release-files
+          path: release-assets
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build for all browsers
-        run: npm run build
-
-      - name: Create automatic GitHub Release
+      - name: Delete previous latest release and tag if they exist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG_NAME="automatic-${{ github.sha }}"
+          gh release delete latest --yes --cleanup-tag || true
+          git push origin :refs/tags/latest || true
 
-          gh release create "$TAG_NAME" \
-            extension/chrome.zip \
-            extension/firefox.xpi \
-            --title "Automatic Release" \
-            --notes "Automatic release for commit ${{ github.sha }}"
+      - name: Create fresh latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create latest \
+            release-assets/chrome.zip \
+            release-assets/firefox.xpi \
+            --title "Latest Release" \
+            --notes "Automatically updated from commit ${GITHUB_SHA}" \
+            --target "${GITHUB_SHA}" \
+            --latest
+
+  deploy:
+    name: Deploy extension branch
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download extension directory
+        uses: actions/download-artifact@v4
+        with:
+          name: extension-dir
+          path: extension
 
       - name: Deploy to extension branch
         uses: peaceiris/actions-gh-pages@v4
