@@ -3,6 +3,7 @@
   Homebase
 </h1>
 
+> [!NOTE]
 > A clean new tab page that keeps you focused.
 
 Homebase is a custom new tab extension with weather, quick links, notes, and beautiful themes.
