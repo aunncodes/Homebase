@@ -26,7 +26,10 @@
   --accent-soft: #e4efe7;
   --focus-ring: rgba(36, 79, 101, 0.14);
   --danger: #8f2f2f;
-  --link-icon-bg: linear-gradient(135deg, #e8d7b8, #b6d5c6);
+  --link-initial-bg: #e7efe8;
+  --link-icon-border: rgba(36, 79, 101, 0.12);
+  --link-favicon-bg: rgba(255, 255, 255, 0.62);
+  --link-favicon-border: rgba(36, 79, 101, 0.08);
   --note-bg: linear-gradient(
       180deg,
       rgba(255, 253, 202, 0.98) 0%,
@@ -120,7 +123,10 @@
   --accent-strong: #24483f;
   --accent-soft: #dcebd7;
   --focus-ring: rgba(49, 95, 84, 0.15);
-  --link-icon-bg: linear-gradient(135deg, #e8e0b8, #a6c6a8);
+  --link-initial-bg: #dcebd7;
+  --link-icon-border: rgba(49, 95, 84, 0.14);
+  --link-favicon-bg: rgba(255, 255, 250, 0.64);
+  --link-favicon-border: rgba(49, 95, 84, 0.1);
   --theme-flash: rgba(213, 233, 225, 0.64);
 }
 
@@ -147,7 +153,10 @@
   --accent-strong: #3d3055;
   --accent-soft: #eadff2;
   --focus-ring: rgba(81, 64, 111, 0.16);
-  --link-icon-bg: linear-gradient(135deg, #f0c7b8, #c8b4e5);
+  --link-initial-bg: #eadff2;
+  --link-icon-border: rgba(81, 64, 111, 0.14);
+  --link-favicon-bg: rgba(255, 255, 255, 0.62);
+  --link-favicon-border: rgba(81, 64, 111, 0.1);
   --theme-flash: rgba(237, 218, 225, 0.64);
 }
 
@@ -179,7 +188,10 @@
   --accent-soft: rgba(245, 215, 120, 0.16);
   --focus-ring: rgba(245, 215, 120, 0.2);
   --danger: #f0a8a1;
-  --link-icon-bg: linear-gradient(135deg, #f5d778, #89d4bf);
+  --link-initial-bg: rgba(245, 215, 120, 0.16);
+  --link-icon-border: rgba(245, 215, 120, 0.22);
+  --link-favicon-bg: rgba(255, 255, 255, 0.1);
+  --link-favicon-border: rgba(216, 244, 232, 0.18);
   --note-bg: linear-gradient(180deg, #fff3a8 0%, #f1dc72 100%);
   --theme-flash: rgba(245, 215, 120, 0.35);
   --card-border: rgba(216, 244, 232, 0.16);
@@ -212,7 +224,10 @@
   --accent-strong: #29494c;
   --accent-soft: #e7ebc2;
   --focus-ring: rgba(63, 97, 99, 0.15);
-  --link-icon-bg: linear-gradient(135deg, #ffd989, #a6ccb6);
+  --link-initial-bg: #e7ebc2;
+  --link-icon-border: rgba(63, 97, 99, 0.14);
+  --link-favicon-bg: rgba(255, 255, 246, 0.62);
+  --link-favicon-border: rgba(63, 97, 99, 0.1);
   --theme-flash: rgba(255, 217, 137, 0.46);
 }
 

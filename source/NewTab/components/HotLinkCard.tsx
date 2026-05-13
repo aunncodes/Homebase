@@ -40,11 +40,14 @@ export const HotLinkCard: FC<HotLinkCardProps> = ({
 }) => {
   const hostname = getHostname(link.url);
   const faviconUrl = link.iconUrl || getFaviconUrl(link.url);
+  const iconClassName = faviconUrl
+    ? `${styles.linkIcon} ${styles.linkIconWithImage}`
+    : styles.linkIcon;
 
   return (
     <article className={styles.linkCard}>
       <a className={styles.linkTarget} href={link.url}>
-        <span className={styles.linkIcon} aria-hidden="true">
+        <span className={iconClassName} aria-hidden="true">
           {faviconUrl ? (
             <img src={faviconUrl} alt="" loading="lazy" />
           ) : (
