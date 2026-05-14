@@ -59,8 +59,6 @@ Homebase is designed for:
 
 ## Installation
 
-### Currently only from source
-
 1. Clone this repository:
 
 ```bash
@@ -73,7 +71,7 @@ npm install
 npm run build
 ```
 
-2. Run the extension:
+3. Run the extension:
 
 For Chrome or Chromium browsers:
 
