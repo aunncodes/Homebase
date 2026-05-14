@@ -14,7 +14,6 @@ import {StickyPad} from './components/StickyPad';
 import {ThemePicker} from './components/ThemePicker';
 import {WeatherWidget} from './components/WeatherWidget';
 import type {LinkDraft} from './components/LinkEditor';
-import {normalizeThemeId} from './themes';
 import styles from './App.module.scss';
 
 const saveDelay = 450;
@@ -49,17 +48,13 @@ function normalizeSettings(settings: HomebaseSettings): HomebaseSettings {
     settings.weatherLocation && typeof settings.weatherLocation === 'object'
       ? settings.weatherLocation
       : defaultHomebaseSettings.weatherLocation;
-  const themeId = normalizeThemeId(settings.themeId);
 
   return {
     hotLinks: Array.isArray(settings.hotLinks)
       ? settings.hotLinks
       : defaultHotLinks,
-    stickyNote:
-      typeof settings.stickyNote === 'string'
-        ? settings.stickyNote
-        : defaultHomebaseSettings.stickyNote,
-    themeId,
+    stickyNote: settings.stickyNote,
+    themeId: settings.themeId,
     weatherLocation,
   };
 }
@@ -88,9 +83,7 @@ const App: FC = () => {
     }
 
     const saveTimer = window.setTimeout(() => {
-      setStorage({homebase}).catch(() => {
-        // Storage can be unavailable in non-extension previews.
-      });
+      setStorage({homebase}).catch(() => {});
     }, saveDelay);
 
     return (): void => {

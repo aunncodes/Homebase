@@ -8,14 +8,6 @@ interface ThemeOption {
 
 export const defaultThemeId: HomebaseThemeId = 'light';
 
-const legacyThemeIds: Record<string, HomebaseThemeId> = {
-  daybreak: 'light',
-  fern: 'green',
-  dusk: 'purple',
-  ink: 'dark',
-  citrus: 'warm',
-};
-
 export const themes: ThemeOption[] = [
   {
     id: 'light',
@@ -43,19 +35,3 @@ export const themes: ThemeOption[] = [
     swatches: ['#fff0b8', '#f3b26f', '#b5d7c1', '#3f6163'],
   },
 ];
-
-export function isThemeId(value: string): value is HomebaseThemeId {
-  return themes.some((theme) => theme.id === value);
-}
-
-export function normalizeThemeId(value: unknown): HomebaseThemeId {
-  if (typeof value !== 'string') {
-    return defaultThemeId;
-  }
-
-  if (isThemeId(value)) {
-    return value;
-  }
-
-  return legacyThemeIds[value] ?? defaultThemeId;
-}
