@@ -18,18 +18,6 @@
     "newtab": "index.html"
   },
 
-  "__chrome__host_permissions": [
-    "https://api.open-meteo.com/*",
-    "https://geocoding-api.open-meteo.com/*",
-    "https://www.google.com/s2/favicons*"
-  ],
-
-  "__firefox__host_permissions": [
-    "https://api.open-meteo.com/*",
-    "https://geocoding-api.open-meteo.com/*",
-    "https://www.google.com/s2/favicons*"
-  ],
-
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self';"
   },
