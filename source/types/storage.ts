@@ -1,79 +1,79 @@
 export interface HotLink {
-  id: string;
-  title: string;
-  url: string;
-  iconUrl?: string;
+	id: string;
+	title: string;
+	url: string;
+	iconUrl?: string;
 }
 
 export interface WeatherLocation {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  admin1?: string;
-  country?: string;
-  timezone?: string;
+	id: number;
+	name: string;
+	latitude: number;
+	longitude: number;
+	admin1?: string;
+	country?: string;
+	timezone?: string;
 }
 export interface WeatherReport {
-  condition: string;
-  high: number;
-  low: number;
-  temperature: number;
+	condition: string;
+	high: number;
+	low: number;
+	temperature: number;
 }
 
-export type HomebaseThemeId = 'light' | 'green' | 'purple' | 'dark' | 'warm';
+export type HomebaseThemeId = "light" | "green" | "purple" | "dark" | "warm";
 
 export interface CachedDailyWeather {
-  locationId: number;
-  forecastDate: string;
-  high: number;
-  low: number;
-  fetchedAt: number;
+	locationId: number;
+	forecastDate: string;
+	high: number;
+	low: number;
+	fetchedAt: number;
 }
 
 export interface HomebaseSettings {
-  hotLinks: HotLink[];
-  stickyNote: string;
-  themeId: HomebaseThemeId;
-  weatherLocation: WeatherLocation | null;
+	hotLinks: HotLink[];
+	stickyNote: string;
+	themeId: HomebaseThemeId;
+	weatherLocation: WeatherLocation | null;
 }
 
 export interface StorageSchema {
-  homebase: HomebaseSettings;
-  dailyWeatherCache: CachedDailyWeather | null;
+	homebase: HomebaseSettings;
+	dailyWeatherCache: CachedDailyWeather | null;
 }
 
 export const defaultHotLinks: HotLink[] = [
-  {
-    id: 'github',
-    title: 'GitHub',
-    url: 'https://github.com',
-  },
-  {
-    id: 'gmail',
-    title: 'Gmail',
-    url: 'https://mail.google.com',
-  },
-  {
-    id: 'drive',
-    title: 'Google Drive',
-    url: 'https://drive.google.com',
-  },
-  {
-    id: 'youtube',
-    title: 'YouTube',
-    url: 'https://youtube.com',
-  },
+	{
+		id: "github",
+		title: "GitHub",
+		url: "https://github.com",
+	},
+	{
+		id: "gmail",
+		title: "Gmail",
+		url: "https://mail.google.com",
+	},
+	{
+		id: "drive",
+		title: "Google Drive",
+		url: "https://drive.google.com",
+	},
+	{
+		id: "youtube",
+		title: "YouTube",
+		url: "https://youtube.com",
+	},
 ];
 
 export const defaultHomebaseSettings: HomebaseSettings = {
-  hotLinks: defaultHotLinks,
-  stickyNote: '',
-  themeId: 'light',
-  weatherLocation: null,
+	hotLinks: defaultHotLinks,
+	stickyNote: "",
+	themeId: "light",
+	weatherLocation: null,
 };
 
 export const defaultStorage: StorageSchema = {
-  homebase: defaultHomebaseSettings,
-  dailyWeatherCache: null,
+	homebase: defaultHomebaseSettings,
+	dailyWeatherCache: null,
 };

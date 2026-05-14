@@ -1,73 +1,73 @@
 @use "../../styles/variables";
 
 .themePicker {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 9;
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	z-index: 9;
 }
 
 .themeToggle {
-  border-radius: 999px;
+	border-radius: 999px;
 }
 
 .themeMenu {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 10px);
-  display: grid;
-  width: 246px;
-  gap: 8px;
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
-  padding: 10px;
-  background: var(--modal-bg);
-  box-shadow: var(--modal-shadow);
-  animation: menu-pop 160ms ease-out;
-  backdrop-filter: blur(18px);
+	position: absolute;
+	right: 0;
+	bottom: calc(100% + 10px);
+	display: grid;
+	width: 246px;
+	gap: 8px;
+	border: 1px solid var(--panel-border);
+	border-radius: 8px;
+	padding: 10px;
+	background: var(--modal-bg);
+	box-shadow: var(--modal-shadow);
+	animation: menu-pop 160ms ease-out;
+	backdrop-filter: blur(18px);
 }
 
 .themeOption {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr) 18px;
-  gap: 10px;
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 8px;
-  color: var(--text);
-  text-align: left;
-  background: transparent;
+	display: grid;
+	grid-template-columns: 58px minmax(0, 1fr) 18px;
+	gap: 10px;
+	align-items: center;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	padding: 8px;
+	color: var(--text);
+	text-align: left;
+	background: transparent;
 
-  &:hover,
-  &[aria-selected="true"] {
-    border-color: var(--soft-border);
-    background: var(--panel-strong-bg);
-  }
+	&:hover,
+	&[aria-selected="true"] {
+		border-color: var(--soft-border);
+		background: var(--panel-strong-bg);
+	}
 
-  > span:nth-child(2) {
-    overflow: hidden;
-    font-size: 13px;
-    font-weight: variables.$semibold;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+	> span:nth-child(2) {
+		overflow: hidden;
+		font-size: 13px;
+		font-weight: variables.$semibold;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 
-  svg {
-    color: var(--accent);
-  }
+	svg {
+		color: var(--accent);
+	}
 }
 
 .themePreview {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: 58px;
-  height: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(23, 32, 51, 0.12);
-  border-radius: 7px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 58px;
+	height: 28px;
+	overflow: hidden;
+	border: 1px solid rgba(23, 32, 51, 0.12);
+	border-radius: 7px;
 
-  span {
-    min-width: 0;
-  }
+	span {
+		min-width: 0;
+	}
 }

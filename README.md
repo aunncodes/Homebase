@@ -66,6 +66,7 @@ git clone https://github.com/aunncodes/homebase.git
 ```
 
 2. Install any dependencies and build the project
+
 ```bash
 npm install
 npm run build
@@ -88,6 +89,7 @@ Select `path-to-your-project/extension/chrome`.
 Open a new tab and enjoy your new homebase.
 
 For Firefox:
+
 ```text
 about://debugging
 ```

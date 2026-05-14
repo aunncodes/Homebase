@@ -1,29 +1,29 @@
-import {defineConfig} from 'vite';
-import path from 'node:path';
-import react from '@vitejs/plugin-react';
-import process from 'node:process';
-import zipPack from 'vite-plugin-zip-pack';
-import checker from 'vite-plugin-checker';
-import clean from 'vite-plugin-clean';
-import WextManifest from 'vite-plugin-wext-manifest';
+import { defineConfig } from "vite";
+import path from "node:path";
+import react from "@vitejs/plugin-react";
+import process from "node:process";
+import zipPack from "vite-plugin-zip-pack";
+import checker from "vite-plugin-checker";
+import clean from "vite-plugin-clean";
+import WextManifest from "vite-plugin-wext-manifest";
 
-import type {Plugin} from 'vite';
+import type { Plugin } from "vite";
 
 export default defineConfig(({ mode }) => {
-	const isDevelopment = mode !== 'production';
-	const sourcePath = path.resolve(__dirname, 'source');
-	const destPath = path.resolve(__dirname, 'extension');
-	const targetBrowser = process.env.TARGET_BROWSER || 'chrome';
+	const isDevelopment = mode !== "production";
+	const sourcePath = path.resolve(__dirname, "source");
+	const destPath = path.resolve(__dirname, "extension");
+	const targetBrowser = process.env.TARGET_BROWSER || "chrome";
 
 	const getOutDir = () => path.resolve(destPath, targetBrowser);
 
 	const getExtensionZipFileName = () => {
 		switch (targetBrowser) {
-			case 'opera': {
+			case "opera": {
 				return `${targetBrowser}.crx`;
 			}
 
-			case 'firefox': {
+			case "firefox": {
 				return `${targetBrowser}.xpi`;
 			}
 
@@ -36,12 +36,12 @@ export default defineConfig(({ mode }) => {
 	return {
 		root: sourcePath,
 
-		publicDir: path.resolve(sourcePath, 'public'),
+		publicDir: path.resolve(sourcePath, "public"),
 
 		resolve: {
 			alias: {
-				'@': path.resolve(sourcePath),
-				'~': path.resolve(__dirname, 'node_modules'),
+				"@": path.resolve(sourcePath),
+				"~": path.resolve(__dirname, "node_modules"),
 			},
 		},
 
@@ -61,13 +61,13 @@ export default defineConfig(({ mode }) => {
 			// Run typescript checker in worker thread
 			checker({
 				typescript: {
-					tsconfigPath: './tsconfig.json',
+					tsconfigPath: "./tsconfig.json",
 				},
 			}),
 
 			// Generate manifest.json for the browser
 			WextManifest({
-				manifestPath: 'manifest.json',
+				manifestPath: "manifest.json",
 				usePackageJSONVersion: true,
 			}),
 
@@ -85,32 +85,34 @@ export default defineConfig(({ mode }) => {
 
 			emptyOutDir: !isDevelopment,
 
-			sourcemap: isDevelopment ? 'inline' : false,
+			sourcemap: isDevelopment ? "inline" : false,
 
-			minify: mode === 'production',
+			minify: mode === "production",
 
 			rollupOptions: {
 				input: {
-					newtab: path.resolve(sourcePath, 'index.html'),
+					newtab: path.resolve(sourcePath, "index.html"),
 				},
 
 				output: {
-					entryFileNames: 'assets/js/[name].bundle.js',
+					entryFileNames: "assets/js/[name].bundle.js",
 					assetFileNames: (assetInfo) => {
 						if (assetInfo.names?.[0]?.match(/\.(css|s[ac]ss|less)$/)) {
-							return 'assets/css/[name]-[hash].css';
+							return "assets/css/[name]-[hash].css";
 						}
-						return 'assets/[name]-[hash].[ext]';
+						return "assets/[name]-[hash].[ext]";
 					},
-					chunkFileNames: 'assets/js/[name]-[hash].chunk.js',
+					chunkFileNames: "assets/js/[name]-[hash].chunk.js",
 				},
 			},
-
 		},
 
 		// esbuild options - drop console/debugger in production
-		esbuild: mode === 'production' ? {
-			drop: ['console', 'debugger'],
-		} : {},
+		esbuild:
+			mode === "production"
+				? {
+						drop: ["console", "debugger"],
+					}
+				: {},
 	};
 });

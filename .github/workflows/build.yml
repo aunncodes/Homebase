@@ -3,49 +3,49 @@ name: Build and Release
 run-name: ${{ github.actor }} started build action
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Build for all browsers
-        run: npm run build
+            - name: Build for all browsers
+              run: npm run build
 
-      - name: Add extensions to GitHub releases
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Automatic Build"
-          files: |
-            extension/chrome.zip
-            extension/firefox.xpi
+            - name: Add extensions to GitHub releases
+              if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  automatic_release_tag: "latest"
+                  prerelease: false
+                  title: "Automatic Build"
+                  files: |
+                      extension/chrome.zip
+                      extension/firefox.xpi

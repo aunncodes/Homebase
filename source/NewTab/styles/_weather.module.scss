@@ -1,147 +1,147 @@
 @use "../../styles/variables";
 
 .weatherWidget {
-  display: flex;
-  width: 100%;
-  min-height: 114px;
-  gap: 14px;
-  align-items: flex-start;
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
-  padding: 18px;
-  color: var(--text);
-  text-align: left;
-  background: var(--panel-bg);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
-  transition:
-    background 0.42s ease,
-    border-color 0.42s ease,
-    box-shadow 0.42s ease;
+	display: flex;
+	width: 100%;
+	min-height: 114px;
+	gap: 14px;
+	align-items: flex-start;
+	border: 1px solid var(--panel-border);
+	border-radius: 8px;
+	padding: 18px;
+	color: var(--text);
+	text-align: left;
+	background: var(--panel-bg);
+	box-shadow: var(--shadow);
+	backdrop-filter: blur(18px);
+	transition:
+		background 0.42s ease,
+		border-color 0.42s ease,
+		box-shadow 0.42s ease;
 
-  &:hover {
-    border-color: var(--soft-border);
-    background: var(--panel-hover-bg);
-  }
+	&:hover {
+		border-color: var(--soft-border);
+		background: var(--panel-hover-bg);
+	}
 }
 
 .weatherIcon {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 8px;
-  color: var(--accent);
-  background: var(--accent-soft);
+	display: grid;
+	width: 42px;
+	height: 42px;
+	flex: 0 0 auto;
+	place-items: center;
+	border-radius: 8px;
+	color: var(--accent);
+	background: var(--accent-soft);
 }
 
 .weatherContent {
-  display: grid;
-  min-width: 0;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 14px;
+	display: grid;
+	min-width: 0;
+	gap: 5px;
+	color: var(--muted);
+	font-size: 14px;
 
-  strong {
-    overflow: hidden;
-    color: var(--heading);
-    font-size: 20px;
-    font-weight: variables.$bold;
-    letter-spacing: 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+	strong {
+		overflow: hidden;
+		color: var(--heading);
+		font-size: 20px;
+		font-weight: variables.$bold;
+		letter-spacing: 0;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .weatherTemp {
-  color: var(--heading);
-  font-size: 26px;
-  font-weight: variables.$bold;
-  line-height: 1;
+	color: var(--heading);
+	font-size: 26px;
+	font-weight: variables.$bold;
+	line-height: 1;
 }
 
 .weatherPickerBody {
-  display: grid;
-  gap: 18px;
+	display: grid;
+	gap: 18px;
 }
 
 .cityPicker {
-  display: grid;
-  align-content: start;
-  gap: 14px;
+	display: grid;
+	align-content: start;
+	gap: 14px;
 }
 
 .citySearch {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 38px;
-  gap: 10px;
-  align-items: end;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 38px;
+	gap: 10px;
+	align-items: end;
 
-  label {
-    display: grid;
-    gap: 6px;
-  }
+	label {
+		display: grid;
+		gap: 6px;
+	}
 
-  span {
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: variables.$semibold;
-  }
+	span {
+		color: var(--muted);
+		font-size: 12px;
+		font-weight: variables.$semibold;
+	}
 
-  input {
-    width: 100%;
-    min-height: 40px;
-    border: 1px solid var(--soft-border);
-    border-radius: 8px;
-    padding: 0 12px;
-    color: var(--text);
-    background: var(--panel-strong-bg);
-    outline: none;
+	input {
+		width: 100%;
+		min-height: 40px;
+		border: 1px solid var(--soft-border);
+		border-radius: 8px;
+		padding: 0 12px;
+		color: var(--text);
+		background: var(--panel-strong-bg);
+		outline: none;
 
-    &:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--focus-ring);
-    }
-  }
+		&:focus {
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px var(--focus-ring);
+		}
+	}
 }
 
 .cityResults {
-  display: grid;
-  gap: 8px;
+	display: grid;
+	gap: 8px;
 
-  button {
-    display: grid;
-    gap: 4px;
-    border: 1px solid var(--soft-border);
-    border-radius: 8px;
-    padding: 12px;
-    color: var(--heading);
-    text-align: left;
-    background: var(--panel-strong-bg);
+	button {
+		display: grid;
+		gap: 4px;
+		border: 1px solid var(--soft-border);
+		border-radius: 8px;
+		padding: 12px;
+		color: var(--heading);
+		text-align: left;
+		background: var(--panel-strong-bg);
 
-    &:hover {
-      border-color: var(--accent);
-      background: var(--panel-hover-bg);
-    }
-  }
+		&:hover {
+			border-color: var(--accent);
+			background: var(--panel-hover-bg);
+		}
+	}
 
-  strong {
-    font-size: 15px;
-  }
+	strong {
+		font-size: 15px;
+	}
 
-  span {
-    color: var(--muted);
-    font-size: 13px;
-  }
+	span {
+		color: var(--muted);
+		font-size: 13px;
+	}
 }
 
 .clearLocationButton {
-  justify-self: start;
-  border: 0;
-  padding: 0;
-  color: var(--danger);
-  background: transparent;
-  font-size: 13px;
-  font-weight: variables.$semibold;
+	justify-self: start;
+	border: 0;
+	padding: 0;
+	color: var(--danger);
+	background: transparent;
+	font-size: 13px;
+	font-weight: variables.$semibold;
 }

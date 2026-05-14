@@ -1,37 +1,37 @@
 {
-  "manifest_version": 3,
-  "name": "Homebase",
-  "version": "1.0.0",
-  "description": "Chrome extension for a clean new tab page to keep you focused.",
-  "short_name": "Homebase",
+	"manifest_version": 3,
+	"name": "Homebase",
+	"version": "1.0.0",
+	"description": "Chrome extension for a clean new tab page to keep you focused.",
+	"short_name": "Homebase",
 
-  "icons": {
-    "16": "assets/icons/favicon-16.png",
-    "32": "assets/icons/favicon-32.png",
-    "48": "assets/icons/favicon-48.png",
-    "128": "assets/icons/favicon-128.png"
-  },
+	"icons": {
+		"16": "assets/icons/favicon-16.png",
+		"32": "assets/icons/favicon-32.png",
+		"48": "assets/icons/favicon-48.png",
+		"128": "assets/icons/favicon-128.png"
+	},
 
-  "permissions": ["storage"],
+	"permissions": ["storage", "identity"],
 
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	},
 
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
-  },
+	"content_security_policy": {
+		"extension_pages": "script-src 'self'; object-src 'self';"
+	},
 
-  "__firefox__browser_specific_settings": {
-    "gecko": {
-      "id": "homebase@choprasahil.sc",
-      "strict_min_version": "142.0",
-      "data_collection_permissions": {
-        "required": ["none"],
-        "optional": []
-      }
-    }
-  },
+	"__firefox__browser_specific_settings": {
+		"gecko": {
+			"id": "homebase@choprasahil.sc",
+			"strict_min_version": "142.0",
+			"data_collection_permissions": {
+				"required": ["none"],
+				"optional": []
+			}
+		}
+	},
 
-  "__chrome__minimum_chrome_version": "88"
+	"__chrome__minimum_chrome_version": "88"
 }
