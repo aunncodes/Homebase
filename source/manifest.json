@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Homebase",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Chrome extension for a clean new tab page to keep you focused.",
 	"short_name": "Homebase",
 

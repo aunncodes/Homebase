@@ -6,7 +6,7 @@
 > [!NOTE]
 > A clean new tab page that keeps you focused.
 
-Homebase is a custom new tab extension with weather, quick links, notes, and beautiful themes.
+Homebase is a custom new tab extension with weather, quick links, notes, timers, and beautiful themes.
 
 ![Homebase dashboard screenshot](./screenshots/dashboard-dark.png)
 
@@ -23,6 +23,10 @@ See the current temperature, condition, and daily high/low right from your new t
 ### Built-in notepad
 
 Write down any thoughts, reminders, or ideas without opening another app.
+
+### In-built timer feature
+
+Set yourself a timer for any upcoming events to keep yourself organized.
 
 ### Multiple themes
 
@@ -107,3 +111,7 @@ Homebase has many different themes you can select from.
 ## Contributing
 
 Contributions are welcome. Feel free to open an issue or submit a pull request with improvements, bug fixes, or new ideas.
+
+### Ringtones
+
+Thanks to [Pixabay](https://pixabay.com/) for the ringtone audio used in Homebase.

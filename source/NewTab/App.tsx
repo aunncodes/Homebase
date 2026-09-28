@@ -7,6 +7,7 @@ import { Header } from "./components/Header";
 import { HotLinks } from "./components/HotLinks";
 import { StickyPad } from "./components/StickyPad";
 import { ThemePicker } from "./components/ThemePicker";
+import { TimerWidget } from "./components/TimerWidget";
 import { WeatherWidget } from "./components/WeatherWidget";
 import type { LinkDraft } from "./components/LinkEditor";
 import styles from "./App.module.scss";
@@ -209,6 +210,7 @@ const App: FC = () => {
 					<StickyPad value={homebase.stickyNote} onChange={updateStickyNote} />
 				</main>
 			</div>
+			<TimerWidget />
 		</div>
 	);
 };

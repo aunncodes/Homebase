@@ -199,3 +199,4 @@ dist/
 !.yarn/releases
 !.yarn/plugins
 .pnp.*
+/extension-test

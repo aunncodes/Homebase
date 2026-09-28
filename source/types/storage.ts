@@ -38,9 +38,24 @@ export interface HomebaseSettings {
 	weatherLocation: WeatherLocation | null;
 }
 
+export type TimerStatus = "idle" | "running" | "paused" | "ringing";
+export type TimerSoundId = "classic" | "digital" | "buzzer" | "chime";
+
+export interface HomebaseTimer {
+	status: TimerStatus;
+	durationMs: number;
+	remainingMs: number;
+	endAt: number | null;
+	alarmStartedAt: number | null;
+	selectedSoundId: TimerSoundId;
+	customPresets: number[];
+	updatedAt: number;
+}
+
 export interface StorageSchema {
 	homebase: HomebaseSettings;
 	dailyWeatherCache: CachedDailyWeather | null;
+	timer: HomebaseTimer;
 }
 
 export const defaultHotLinks: HotLink[] = [
@@ -73,7 +88,21 @@ export const defaultHomebaseSettings: HomebaseSettings = {
 	weatherLocation: null,
 };
 
+const defaultTimerDurationMs = 15 * 60 * 1000;
+
+export const defaultTimer: HomebaseTimer = {
+	status: "idle",
+	durationMs: defaultTimerDurationMs,
+	remainingMs: defaultTimerDurationMs,
+	endAt: null,
+	alarmStartedAt: null,
+	selectedSoundId: "classic",
+	customPresets: [],
+	updatedAt: 0,
+};
+
 export const defaultStorage: StorageSchema = {
 	homebase: defaultHomebaseSettings,
 	dailyWeatherCache: null,
+	timer: defaultTimer,
 };
