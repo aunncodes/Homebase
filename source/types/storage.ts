@@ -14,6 +14,7 @@ export interface WeatherLocation {
 	country?: string;
 	timezone?: string;
 }
+
 export interface WeatherReport {
 	condition: string;
 	high: number;
@@ -22,6 +23,48 @@ export interface WeatherReport {
 }
 
 export type HomebaseThemeId = "light" | "green" | "purple" | "dark" | "warm";
+
+export interface CalendarSettings {
+	selectedCalendarIds: string[];
+	daysAhead: number;
+	maxEvents: number;
+	showAllDayEvents: boolean;
+}
+
+export interface CalendarAuthCache {
+	accessToken: string;
+	expiresAt: number;
+}
+
+export interface CalendarSummary {
+	id: string;
+	name: string;
+	backgroundColor?: string;
+	primary?: boolean;
+	selected?: boolean;
+}
+
+export interface CalendarEventPreview {
+	id: string;
+	calendarId: string;
+	calendarName: string;
+	calendarColor?: string;
+	title: string;
+	start: string;
+	end?: string;
+	isAllDay: boolean;
+	location?: string;
+	htmlLink?: string;
+}
+
+export interface CalendarEventsCache {
+	events: CalendarEventPreview[];
+	fetchedAt: number;
+	selectedCalendarIds: string[];
+	daysAhead: number;
+	maxEvents: number;
+	showAllDayEvents: boolean;
+}
 
 export interface CachedDailyWeather {
 	locationId: number;
@@ -36,12 +79,22 @@ export interface HomebaseSettings {
 	stickyNote: string;
 	themeId: HomebaseThemeId;
 	weatherLocation: WeatherLocation | null;
+	calendar: CalendarSettings;
 }
 
 export interface StorageSchema {
 	homebase: HomebaseSettings;
 	dailyWeatherCache: CachedDailyWeather | null;
+	calendarAuthCache: CalendarAuthCache | null;
+	calendarEventsCache: CalendarEventsCache | null;
 }
+
+export const defaultCalendarSettings: CalendarSettings = {
+	selectedCalendarIds: [],
+	daysAhead: 7,
+	maxEvents: 6,
+	showAllDayEvents: true,
+};
 
 export const defaultHotLinks: HotLink[] = [
 	{
@@ -71,9 +124,12 @@ export const defaultHomebaseSettings: HomebaseSettings = {
 	stickyNote: "",
 	themeId: "light",
 	weatherLocation: null,
+	calendar: defaultCalendarSettings,
 };
 
 export const defaultStorage: StorageSchema = {
 	homebase: defaultHomebaseSettings,
 	dailyWeatherCache: null,
+	calendarAuthCache: null,
+	calendarEventsCache: null,
 };

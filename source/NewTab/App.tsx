@@ -8,6 +8,7 @@ import { HotLinks } from "./components/HotLinks";
 import { StickyPad } from "./components/StickyPad";
 import { ThemePicker } from "./components/ThemePicker";
 import { WeatherWidget } from "./components/WeatherWidget";
+import { CalendarWidget } from "./components/CalendarWidget";
 import type { LinkDraft } from "./components/LinkEditor";
 import styles from "./App.module.scss";
 
@@ -35,13 +36,12 @@ function normalizeUrl(value: string): string {
 }
 
 function normalizeSettings(settings: HomebaseSettings): HomebaseSettings {
-	const weatherLocation = settings.weatherLocation && typeof settings.weatherLocation === "object" ? settings.weatherLocation : defaultHomebaseSettings.weatherLocation;
-
 	return {
 		hotLinks: Array.isArray(settings.hotLinks) ? settings.hotLinks : defaultHotLinks,
-		stickyNote: settings.stickyNote,
+		stickyNote: typeof settings.stickyNote === "string" ? settings.stickyNote : defaultHomebaseSettings.stickyNote,
 		themeId: settings.themeId,
-		weatherLocation,
+		weatherLocation: settings.weatherLocation,
+		calendar: settings.calendar,
 	};
 }
 
@@ -171,6 +171,15 @@ const App: FC = () => {
 		});
 	};
 
+	const updateCalendarSettings = (calendar: HomebaseSettings["calendar"]): void => {
+		setHomebase((currentHomebase): HomebaseSettings => {
+			return {
+				...currentHomebase,
+				calendar,
+			};
+		});
+	};
+
 	const updateTheme = (themeId: HomebaseThemeId): void => {
 		if (themeId === homebase.themeId) {
 			return;
@@ -206,6 +215,7 @@ const App: FC = () => {
 
 				<main className={styles.dashboard}>
 					<HotLinks links={homebase.hotLinks} onAddLink={createLink} onDeleteLink={deleteLink} onUpdateLink={updateLink} />
+					<CalendarWidget settings={homebase.calendar} onSettingsChange={updateCalendarSettings} />
 					<StickyPad value={homebase.stickyNote} onChange={updateStickyNote} />
 				</main>
 			</div>
