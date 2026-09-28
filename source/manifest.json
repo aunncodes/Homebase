@@ -12,7 +12,7 @@
 		"128": "assets/icons/favicon-128.png"
 	},
 
-	"permissions": ["storage", "identity"],
+	"permissions": ["storage"],
 
 	"chrome_url_overrides": {
 		"newtab": "index.html"
